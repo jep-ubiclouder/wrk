@@ -37,7 +37,7 @@ var org = nforce.createConnection({
 
 // meta donées de SF
 var fs = require('fs');
-var sfmetadata = JSON.parse(fs.readFileSync('Desktop/inteygrate-master/sfMetadata.json', 'utf8'));
+var sfmetadata = JSON.parse(fs.readFileSync('./sfMetadata.json', 'utf8'));
 for (var table in sfmetadata) {
     console.log(sfmetadata[table].Name);
     console.log(sfmetadata[table].Prefix);
