@@ -1,0 +1,924 @@
+[
+  {
+    "Prefix": "a0R",
+    "Name": "UBMU__FilterValue__c",
+    "fields": [
+      {
+        "fType": "ID",
+        "fPrecision": 0,
+        "fName": "Id",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "IsDeleted",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "Name",
+        "fLength": 80,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "CreatedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "CreatedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastModifiedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "LastModifiedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "SystemModstamp",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "UBMU__MassUpdate__c",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "UBMU__FieldName__c",
+        "fLength": 80,
+        "fDigits": 0
+      },
+      {
+        "fType": "TEXTAREA",
+        "fPrecision": 0,
+        "fName": "UBMU__FilterValue__c",
+        "fLength": 32000,
+        "fDigits": 0
+      },
+      {
+        "fType": "PICKLIST",
+        "fPrecision": 0,
+        "fName": "UBMU__LogicalJoin__c",
+        "fLength": 255,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "UBMU__Operator__c",
+        "fLength": 25,
+        "fDigits": 0
+      }
+    ]
+  },
+  {
+    "Prefix": "a0S",
+    "Name": "UBMU__MassUpdate__c",
+    "fields": [
+      {
+        "fType": "ID",
+        "fPrecision": 0,
+        "fName": "Id",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "OwnerId",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "IsDeleted",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "Name",
+        "fLength": 80,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "CreatedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "CreatedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastModifiedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "LastModifiedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "SystemModstamp",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastViewedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastReferencedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "UBMU__type__c",
+        "fLength": 80,
+        "fDigits": 0
+      }
+    ]
+  },
+  {
+    "Prefix": "a0T",
+    "Name": "UBMU__SelectValue__c",
+    "fields": [
+      {
+        "fType": "ID",
+        "fPrecision": 0,
+        "fName": "Id",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "IsDeleted",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "Name",
+        "fLength": 80,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "CreatedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "CreatedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastModifiedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "LastModifiedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "SystemModstamp",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "UBMU__MassUpdate__c",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "UBMU__FieldName__c",
+        "fLength": 255,
+        "fDigits": 0
+      }
+    ]
+  },
+  {
+    "Prefix": "a0U",
+    "Name": "UBMU__TestObject__c",
+    "fields": [
+      {
+        "fType": "ID",
+        "fPrecision": 0,
+        "fName": "Id",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "OwnerId",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "IsDeleted",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "Name",
+        "fLength": 80,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "CreatedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "CreatedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastModifiedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "LastModifiedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "SystemModstamp",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "DOUBLE",
+        "fPrecision": 18,
+        "fName": "UBMU__Double__c",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "UBMU__Test_Object__c",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "UBMU__boolean__c",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "CURRENCY",
+        "fPrecision": 18,
+        "fName": "UBMU__currency__c",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATE",
+        "fPrecision": 0,
+        "fName": "UBMU__date__c",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "UBMU__datetime__c",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "MULTIPICKLIST",
+        "fPrecision": 3,
+        "fName": "UBMU__msp__c",
+        "fLength": 4099,
+        "fDigits": 0
+      },
+      {
+        "fType": "PERCENT",
+        "fPrecision": 18,
+        "fName": "UBMU__percent__c",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "PICKLIST",
+        "fPrecision": 0,
+        "fName": "UBMU__picklist__c",
+        "fLength": 255,
+        "fDigits": 0
+      }
+    ]
+  },
+  {
+    "Prefix": "a0V",
+    "Name": "UBMU__Updatevalue__c",
+    "fields": [
+      {
+        "fType": "ID",
+        "fPrecision": 0,
+        "fName": "Id",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "IsDeleted",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "Name",
+        "fLength": 80,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "CreatedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "CreatedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastModifiedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "LastModifiedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "SystemModstamp",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "UBMU__MassUpdate__c",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "UBMU__FieldName__c",
+        "fLength": 255,
+        "fDigits": 0
+      },
+      {
+        "fType": "TEXTAREA",
+        "fPrecision": 0,
+        "fName": "UBMU__NewValue__c",
+        "fLength": 32000,
+        "fDigits": 0
+      }
+    ]
+  },
+  {
+    "Prefix": "a0q",
+    "Name": "Ub_Spoken_Language__c",
+    "fields": [
+      {
+        "fType": "ID",
+        "fPrecision": 0,
+        "fName": "Id",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "IsDeleted",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "Name",
+        "fLength": 80,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "CreatedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "CreatedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastModifiedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "LastModifiedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "SystemModstamp",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "Contact_Name__c",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "PICKLIST",
+        "fPrecision": 0,
+        "fName": "Language__c",
+        "fLength": 255,
+        "fDigits": 0
+      },
+      {
+        "fType": "PICKLIST",
+        "fPrecision": 0,
+        "fName": "Fluency__c",
+        "fLength": 255,
+        "fDigits": 0
+      }
+    ]
+  },
+  {
+    "Prefix": "a0r",
+    "Name": "Ub_Contact_Dummy__c",
+    "fields": [
+      {
+        "fType": "ID",
+        "fPrecision": 0,
+        "fName": "Id",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "OwnerId",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "IsDeleted",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "Name",
+        "fLength": 80,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "CreatedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "CreatedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastModifiedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "LastModifiedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "SystemModstamp",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastViewedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastReferencedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "first_name__c",
+        "fLength": 35,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "Last_Name__c",
+        "fLength": 35,
+        "fDigits": 0
+      },
+      {
+        "fType": "TEXTAREA",
+        "fPrecision": 0,
+        "fName": "Short_Bio__c",
+        "fLength": 255,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATE",
+        "fPrecision": 0,
+        "fName": "DateOfBirth__c",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "PICKLIST",
+        "fPrecision": 0,
+        "fName": "Gender__c",
+        "fLength": 255,
+        "fDigits": 0
+      },
+      {
+        "fType": "TEXTAREA",
+        "fPrecision": 0,
+        "fName": "Long_Bio__c",
+        "fLength": 32768,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "ubLongBioChanged__c",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "MULTIPICKLIST",
+        "fPrecision": 4,
+        "fName": "testMultipick__c",
+        "fLength": 4099,
+        "fDigits": 0
+      }
+    ]
+  },
+  {
+    "Prefix": "a0s",
+    "Name": "Ub_Prof_exp__c",
+    "fields": [
+      {
+        "fType": "ID",
+        "fPrecision": 0,
+        "fName": "Id",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "IsDeleted",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "Name",
+        "fLength": 80,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "CreatedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "CreatedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastModifiedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "LastModifiedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "SystemModstamp",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "DOUBLE",
+        "fPrecision": 4,
+        "fName": "YearStart__c",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "DOUBLE",
+        "fPrecision": 4,
+        "fName": "YearEnd__c",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "PICKLIST",
+        "fPrecision": 0,
+        "fName": "JobPosition__c",
+        "fLength": 255,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "CompanyLegalName__c",
+        "fLength": 50,
+        "fDigits": 0
+      },
+      {
+        "fType": "TEXTAREA",
+        "fPrecision": 0,
+        "fName": "Job_Description__c",
+        "fLength": 255,
+        "fDigits": 0
+      },
+      {
+        "fType": "PICKLIST",
+        "fPrecision": 0,
+        "fName": "Department__c",
+        "fLength": 255,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "Etape__c",
+        "fLength": 18,
+        "fDigits": 0
+      }
+    ]
+  },
+  {
+    "Prefix": "a0t",
+    "Name": "Ub_Biography__c",
+    "fields": [
+      {
+        "fType": "ID",
+        "fPrecision": 0,
+        "fName": "Id",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "OwnerId",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "IsDeleted",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "Name",
+        "fLength": 80,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "CreatedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "CreatedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastModifiedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "LastModifiedById",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "SystemModstamp",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastViewedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "DATETIME",
+        "fPrecision": 0,
+        "fName": "LastReferencedDate",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "REFERENCE",
+        "fPrecision": 0,
+        "fName": "Contact__c",
+        "fLength": 18,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "Is_Published__c",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "BOOLEAN",
+        "fPrecision": 0,
+        "fName": "Is_Print__c",
+        "fLength": 0,
+        "fDigits": 0
+      },
+      {
+        "fType": "STRING",
+        "fPrecision": 0,
+        "fName": "Quote__c",
+        "fLength": 50,
+        "fDigits": 0
+      }
+    ]
+  }
+]
