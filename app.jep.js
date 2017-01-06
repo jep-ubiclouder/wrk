@@ -86,7 +86,7 @@ function checkDescription(myId, oauth, what2chk) {
 
 
 function buildSQLRecord(id, record) {
-    if (record.operation =='deleted'){
+    if (record.operation !='deleted'){
         var qryMySQL = 'insert into ubjournal(Objectname,FieldName,strFieldValueSmall,sfID,operation,sequence) VALUES (\'%(table)s\',\'%(champ)s\',\'%(valeur)s\',\'%(id)s\',\'%(operation)s\',%(sequence)s);'
 
         var qryPgSQL = ' insert into "ubJournaling"("Objectname","FieldName","strFieldValueSmall","sfID","operation","sequence") VALUES (\'%(table)s\',\'%(champ)s\',\'%(valeur)s\',\'%(id)s\',\'%(operation)s\',%(sequence)s);'
@@ -96,13 +96,16 @@ function buildSQLRecord(id, record) {
     if (record.champ != 'Id') {
         var qryMySQL = 'insert into ubjournal(Objectname,FieldName,strFieldValueSmall,sfID,operation,sequence) VALUES (\'%(table)s\',\'%(champ)s\',\'%(valeur)s\',\'%(id)s\',\'%(operation)s\',%(sequence)s);'
         var qryPgSQL = ' insert into "ubJournaling"("Objectname","FieldName","strFieldValueSmall","sfID","operation","sequence") VALUES (\'%(table)s\',\'%(champ)s\',\'%(valeur)s\',\'%(id)s\',\'%(operation)s\',%(sequence)s);'
+
+	
         var MySQLqry = sprintf(qryMySQL, record);
         var PGSQLqry = sprintf(qryPgSQL, record);
+console.log(PGSQLqry);
         // var qry = 'insert into ubjournal(Objectname,FieldName,strFieldValueSmall,sfID,operation,sequence) VALUES (\''+table +'\',\''+champ +'\',\''+valeur +'\',\''+id +'\',\''+operation +'\','+sequence+');';
         // console.log(qry);
     }
-    console.log(Date(),sprintf(qryMySQL, record));
-    console.log(Date(),sprintf(qryPgSQL, record));
+    //console.log(Date(),sprintf(qryMySQL, record));
+    //console.log(Date(),sprintf(qryPgSQL, record));
     pool.connect(function(err, client, done) {
         if (err) {
             return console.error('error fetching client from pool', err);
