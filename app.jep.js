@@ -101,9 +101,9 @@ function buildSQLRecord(id, record) {
         // var qry = 'insert into ubjournal(Objectname,FieldName,strFieldValueSmall,sfID,operation,sequence) VALUES (\''+table +'\',\''+champ +'\',\''+valeur +'\',\''+id +'\',\''+operation +'\','+sequence+');';
         // console.log(qry);
     }
-    console.log(sprintf(qryMySQL, record));
-    console.log(sprintf(qryPgSQL, record));
-    /*pool.connect(function(err, client, done) {
+    console.log(Date(),sprintf(qryMySQL, record));
+    console.log(Date(),sprintf(qryPgSQL, record));
+    pool.connect(function(err, client, done) {
         if (err) {
             return console.error('error fetching client from pool', err);
         }
@@ -116,11 +116,11 @@ function buildSQLRecord(id, record) {
                 return console.error('error running query', err);
             }
         });
-    });*/
+    });
 
     connection.query(MySQLqry, function(err, rows, fields) {
         if (!err)
-            console.log('Transaction OK: ', MySQLqry);
+            console.log(Date(),'Transaction OK: ', MySQLqry);
         else{
            // console.log('Error while performing Query.', err);
         }
