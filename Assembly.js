@@ -149,7 +149,7 @@ org.authenticate({
 
 
                         if (chBF){
-                            var q = 'select id, Biography_French__c from Biography__c where Id="'+myId +'"';
+                            var q = "select id, Biography_French__c from Biography__c where Id='"+myId +"'";
                             console.log(q);
                             org.query({
                                 oauth:oauth,
@@ -166,11 +166,11 @@ org.authenticate({
                             });
                         }
                         if (chBE){
-                            var q = 'select id, Biography_English__c from Biography__c where Id = "'+myId +'"';
+                            var q = "select id, Biography_English__c from Biography__c where Id = '"+myId +"'";
                             console.log(q);
                             org.query({
                                 oauth:oauth,
-                                query :"select id, Biography_English__c from Biography__c where Id = '"+myId +"'"
+                                query :q
                             } , function(err,resp){
                                 console.log(resp.records[0].get('Biography_English__c'));
                                 var bio = nforce.createSObject('Biography__c');
@@ -182,11 +182,11 @@ org.authenticate({
                             });
                         }
                         if (chBD){
-                            var q = 'select id, Biography_German__c from Biography__c where Id = "'+myId +'"';
+                            var q = "select id, Biography_German__c from Biography__c where Id = '"+myId +"'";
                             console.log(q);
                             org.query({
                                 oauth:oauth,
-                                query :"select id, Biography_German__c from Biography__c where Id = '"+myId +"'"
+                                query :q
                             } , function(err,resp){
                                 console.log(resp.records[0].get('Biography_German__c'));
                                 var bio = nforce.createSObject('Biography__c');
