@@ -157,7 +157,10 @@ org.authenticate({
                             } , function(err,resp){
                                 console.log(resp);
                                 console.log(resp.records[0].get('Biography_French__c'));
-                                org.update({{'Id':myId,'chkBioF__c':false }, oauth:oauth}, function(err, r){
+                                var bio = nforce.createSObject('Biography__c');
+                                bio.set('Id',myId);
+                                bio.set('chkBioF__c',false);
+                                org.update({sobject:bio, oauth:oauth}, function(err, r){
                                 	  if(!err) console.log('It worked!');
                                 });
                             });
@@ -170,7 +173,10 @@ org.authenticate({
                                 query :"select id, Biography_English__c from Biography__c where Id = '"+myId +"'"
                             } , function(err,resp){
                                 console.log(resp.records[0].get('Biography_English__c'));
-                                org.update({{'Id':myId,'chkBioE__c':false }, oauth:oauth}, function(err, r){
+                                var bio = nforce.createSObject('Biography__c');
+                                bio.set('Id',myId);
+                                bio.set('chkBioE__c',false);
+                                org.update({sobject:bio, oauth:oauth}, function(err, r){
                                 	  if(!err) console.log('It worked!');
                                 });
                             });
@@ -183,7 +189,10 @@ org.authenticate({
                                 query :"select id, Biography_German__c from Biography__c where Id = '"+myId +"'"
                             } , function(err,resp){
                                 console.log(resp.records[0].get('Biography_German__c'));
-                                org.update({{'Id':myId,'chkBioD__c':false }, oauth:oauth}, function(err, r){
+                                var bio = nforce.createSObject('Biography__c');
+                                bio.set('Id',myId);
+                                bio.set('chkBioD__c',false);
+                                org.update({sobject:bio, oauth:oauth}, function(err, r){
                                 	  if(!err) console.log('It worked!');
                                 });
                                 
