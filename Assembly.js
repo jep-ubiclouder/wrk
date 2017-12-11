@@ -145,8 +145,7 @@ org.authenticate({
                         var chBF = data.sobject.chkBioF__c;
                         var chBE = data.sobject.chkBioE__c;
                         var chBD = data.sobject.chkBioD__c;
-                        console.log(chBF,chBE,chBD);
-
+                        // console.log(chBF,chBE,chBD);
 
                         if (chBF){
                             var q = "select id, Biography_French__c from Biography__c where Id='"+myId +"'";
@@ -155,8 +154,10 @@ org.authenticate({
                                 oauth:oauth,
                                 query : q
                             } , function(err,resp){
-                                console.log(resp);
-                                console.log(resp.records[0].get('Biography_French__c'));
+                                // console.log(resp);
+                                // console.log(resp.records[0].get('Biography_French__c'));
+                                var b = {'Id':myId, 'Biography_French__c': resp.records[0].get('Biography_French__c')};
+                                console.log(JSON.stringify(b));
                                 var bio = nforce.createSObject('Biography__c');
                                 bio.set('Id',myId);
                                 bio.set('chkBioF__c',false);
@@ -173,6 +174,9 @@ org.authenticate({
                                 query :q
                             } , function(err,resp){
                                 console.log(resp.records[0].get('Biography_English__c'));
+                                var b = {'Id':myId, 'Biography_English__c': resp.records[0].get('Biography_English__c')};
+                                console.log(JSON.stringify(b));
+                                
                                 var bio = nforce.createSObject('Biography__c');
                                 bio.set('Id',myId);
                                 bio.set('chkBioE__c',false);
