@@ -48,10 +48,10 @@ var fs = require('fs');
  * var pg = require('pg'); var pool = new pg.Pool({ user: 'postgres', password:
  * 'ubi2016', host: '192.168.8.100', database: 'mm', max: 10, // max number of
  * clients in pool idleTimeoutMillis: 1000, // close & remove clients which have
- * been idle > 1 second }); console.log(pool);
- *  // connection a MySQL var mysql = require('mysql'); var connection =
- * mysql.createConnection({ host: '192.168.8.100', user: 'jep', password:
- * 'ubi2016', database: 'mm' }); connection.connect();
+ * been idle > 1 second }); console.log(pool); // connection a MySQL var mysql =
+ * require('mysql'); var connection = mysql.createConnection({ host:
+ * '192.168.8.100', user: 'jep', password: 'ubi2016', database: 'mm' });
+ * connection.connect();
  */
 /*
  * function checkDescription(myId, oauth, what2chk) { var fields =
@@ -157,6 +157,9 @@ org.authenticate({
                             } , function(err,resp){
                                 console.log(resp);
                                 console.log(resp.records[0].get('Biography_French__c'));
+                                org.update({'Id':myId,'chkBioF__c':false }, oauth:oauth, function(err, r){
+                                	  if(!err) console.log('It worked!');
+                                });
                             });
                         }
                         if (chBE){
@@ -167,7 +170,9 @@ org.authenticate({
                                 query :"select id, Biography_English__c from Biography__c where Id = '"+myId +"'"
                             } , function(err,resp){
                                 console.log(resp.records[0].get('Biography_English__c'));
-                                
+                                org.update({'Id':myId,'chkBioE__c':false }, oauth:oauth, function(err, r){
+                                	  if(!err) console.log('It worked!');
+                                });
                             });
                         }
                         if (chBD){
@@ -178,6 +183,10 @@ org.authenticate({
                                 query :"select id, Biography_German__c from Biography__c where Id = '"+myId +"'"
                             } , function(err,resp){
                                 console.log(resp.records[0].get('Biography_German__c'));
+                                org.update({'Id':myId,'chkBioD__c':false }, oauth:oauth, function(err, r){
+                                	  if(!err) console.log('It worked!');
+                                });
+                                
                             });
                         }
                         /*
