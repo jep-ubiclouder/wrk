@@ -32,7 +32,8 @@ var org = nforce.createConnection({
     clientSecret: config.CLIENT_SECRET,
     redirectUri: config.CALLBACK_URL + '/oauth/_callback',
     mode: 'multi',
-    environment: config.ENVIRONMENT // optional, sandbox or production, production default
+    environment: config.ENVIRONMENT // optional, sandbox or production,
+									// production default
 });
 
 // meta donées de SF
@@ -51,7 +52,8 @@ var pool = new pg.Pool({
     host: '192.168.8.100',
     database: 'mm',
     max: 10, // max number of clients in pool
-    idleTimeoutMillis: 1000, // close & remove clients which have been idle > 1 second
+    idleTimeoutMillis: 1000, // close & remove clients which have been idle >
+								// 1 second
 });
 console.log(pool);
 
@@ -76,7 +78,7 @@ function checkDescription(myId, oauth, what2chk) {
         if (err) {
             console.log(err);
         }
-        //console.log(resp);
+        // console.log(resp);
         if (resp.records && resp.records.length) {
             console.log(resp.records[0]);
         }
@@ -101,17 +103,20 @@ function buildSQLRecord(id, record) {
         var MySQLqry = sprintf(qryMySQL, record);
         var PGSQLqry = sprintf(qryPgSQL, record);
 console.log(PGSQLqry);
-        // var qry = 'insert into ubjournal(Objectname,FieldName,strFieldValueSmall,sfID,operation,sequence) VALUES (\''+table +'\',\''+champ +'\',\''+valeur +'\',\''+id +'\',\''+operation +'\','+sequence+');';
+        // var qry = 'insert into
+		// ubjournal(Objectname,FieldName,strFieldValueSmall,sfID,operation,sequence)
+		// VALUES (\''+table +'\',\''+champ +'\',\''+valeur +'\',\''+id
+		// +'\',\''+operation +'\','+sequence+');';
         // console.log(qry);
     }
-    //console.log(Date(),sprintf(qryMySQL, record));
-    //console.log(Date(),sprintf(qryPgSQL, record));
+    // console.log(Date(),sprintf(qryMySQL, record));
+    // console.log(Date(),sprintf(qryPgSQL, record));
     pool.connect(function(err, client, done) {
         if (err) {
             return console.error('error fetching client from pool', err);
         }
         client.query(PGSQLqry, '', function(err, result) {
-            //call `done()` to release the client back to the pool 
+            // call `done()` to release the client back to the pool
             console.log('transaction ok', PGSQLqry);
             done();
 
@@ -145,7 +150,8 @@ org.authenticate({
             if (err) throw err;
             if (resp.records && resp.records.length) {
                 resp.records.forEach(function(rec) {
-                    // console.log('Pushtopic: ' + rec.get('Name') + ' ' + rec.get('query'));
+                    // console.log('Pushtopic: ' + rec.get('Name') + ' ' +
+					// rec.get('query'));
                     var str = org.stream({
                         topic: rec.get('Name'),
                         oauth: oauth
@@ -157,8 +163,9 @@ org.authenticate({
                         console.log('Error received from pushtopic: ' + error);
                     });
                     str.on('data', function(data) {
-                        //console.log('Received the following from pushtopic:');
-                        //console.log(data);
+                        // console.log('Received the following from
+						// pushtopic:');
+                        // console.log(data);
                         var myId = data.sobject.Id;
                         var key = myId.substring(0, 3);
                         var flds2callback = [];
@@ -186,13 +193,12 @@ org.authenticate({
                             }
                             buildSQLRecord(myId, record);
                         }
-                        /*var chkDescr = data.sobject.ubLongBioChanged__c;
-                         // console.log(chkDescr);
-                         if (chkDescr) {
-                             var what2chk = data.sobject.testMultipick__c;
-                             console.log(what2chk);
-                             checkDescription(myId, oauth, what2chk);
-                         }*/
+                        /*
+						 * var chkDescr = data.sobject.ubLongBioChanged__c; //
+						 * console.log(chkDescr); if (chkDescr) { var what2chk =
+						 * data.sobject.testMultipick__c; console.log(what2chk);
+						 * checkDescription(myId, oauth, what2chk); }
+						 */
                         // emit the record to be displayed on the page
                         socket.emit('record-processed', JSON.stringify(data));
                     });
@@ -200,7 +206,7 @@ org.authenticate({
             }
         });
     }
-    //console.log(app.get('/Pushtopic'));
+    // console.log(app.get('/Pushtopic'));
     // subscribe to a pushtopic
 });
 app.set('port', process.env.PORT || 3001);
@@ -208,7 +214,7 @@ app.set('port', process.env.PORT || 3001);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+// app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

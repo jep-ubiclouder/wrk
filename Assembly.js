@@ -32,100 +32,82 @@ var org = nforce.createConnection({
     clientSecret: config.CLIENT_SECRET,
     redirectUri: config.CALLBACK_URL + '/oauth/_callback',
     mode: 'multi',
-    environment: config.ENVIRONMENT // optional, sandbox or production, production default
+    environment: config.ENVIRONMENT // optional, sandbox or production,
+									// production default
 });
 
 // meta donées de SF
 var fs = require('fs');
-var sfmetadata = JSON.parse(fs.readFileSync('./sfMetadata.json', 'utf8'));
-/*for (var table in sfmetadata) {
-    console.log(sfmetadata[table].Name);
-    console.log(sfmetadata[table].Prefix);
-}
-*/
+// var sfmetadata = JSON.parse(fs.readFileSync('./sfMetadata.json', 'utf8'));
+/*
+ * for (var table in sfmetadata) { console.log(sfmetadata[table].Name);
+ * console.log(sfmetadata[table].Prefix); }
+ */
 // Connection a PostGres
-/*var pg = require('pg');
-var pool = new pg.Pool({
-    user: 'postgres',
-    password: 'ubi2016',
-    host: '192.168.8.100',
-    database: 'mm',
-    max: 10, // max number of clients in pool
-    idleTimeoutMillis: 1000, // close & remove clients which have been idle > 1 second
-});
-console.log(pool);
-
-// connection a MySQL
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host: '192.168.8.100',
-    user: 'jep',
-    password: 'ubi2016',
-    database: 'mm'
-});
-connection.connect();
-*/
-/* function checkDescription(myId, oauth, what2chk) {
-    var fields = what2chk.replace(';', ',');
-    var qry = "select id, " + fields + " from Ub_Contact_Dummy__c where id='" + myId + "'";
-    console.log(qry);
-    org.query({
-        query: qry,
-        oauth: oauth
-    }, function(err, resp) {
-        if (err) {
-            console.log(err);
-        }
-        //console.log(resp);
-        if (resp.records && resp.records.length) {
-            console.log(resp.records[0]);
-        }
-    });
-} */
+/*
+ * var pg = require('pg'); var pool = new pg.Pool({ user: 'postgres', password:
+ * 'ubi2016', host: '192.168.8.100', database: 'mm', max: 10, // max number of
+ * clients in pool idleTimeoutMillis: 1000, // close & remove clients which have
+ * been idle > 1 second }); console.log(pool);
+ *  // connection a MySQL var mysql = require('mysql'); var connection =
+ * mysql.createConnection({ host: '192.168.8.100', user: 'jep', password:
+ * 'ubi2016', database: 'mm' }); connection.connect();
+ */
+/*
+ * function checkDescription(myId, oauth, what2chk) { var fields =
+ * what2chk.replace(';', ','); var qry = "select id, " + fields + " from
+ * Ub_Contact_Dummy__c where id='" + myId + "'"; console.log(qry); org.query({
+ * query: qry, oauth: oauth }, function(err, resp) { if (err) {
+ * console.log(err); } //console.log(resp); if (resp.records &&
+ * resp.records.length) { console.log(resp.records[0]); } }); }
+ */
 
 
 
-/*function buildSQLRecord(id, record) {
-    if (record.operation =='deleted'){
-        var qryMySQL = 'insert into ubjournal(Objectname,FieldName,strFieldValueSmall,sfID,operation,sequence) VALUES (\'%(table)s\',\'%(champ)s\',\'%(valeur)s\',\'%(id)s\',\'%(operation)s\',%(sequence)s);'
+/*
+ * function buildSQLRecord(id, record) { if (record.operation =='deleted'){ var
+ * qryMySQL = 'insert into
+ * ubjournal(Objectname,FieldName,strFieldValueSmall,sfID,operation,sequence)
+ * VALUES
+ * (\'%(table)s\',\'%(champ)s\',\'%(valeur)s\',\'%(id)s\',\'%(operation)s\',%(sequence)s);'
+ * 
+ * var qryPgSQL = ' insert into
+ * "ubJournaling"("Objectname","FieldName","strFieldValueSmall","sfID","operation","sequence")
+ * VALUES
+ * (\'%(table)s\',\'%(champ)s\',\'%(valeur)s\',\'%(id)s\',\'%(operation)s\',%(sequence)s);'
+ * var MySQLqry = sprintf(qryMySQL, record); var PGSQLqry = sprintf(qryPgSQL,
+ * record); } if (record.champ != 'Id') { var qryMySQL = 'insert into
+ * ubjournal(Objectname,FieldName,strFieldValueSmall,sfID,operation,sequence)
+ * VALUES
+ * (\'%(table)s\',\'%(champ)s\',\'%(valeur)s\',\'%(id)s\',\'%(operation)s\',%(sequence)s);'
+ * var qryPgSQL = ' insert into
+ * "ubJournaling"("Objectname","FieldName","strFieldValueSmall","sfID","operation","sequence")
+ * VALUES
+ * (\'%(table)s\',\'%(champ)s\',\'%(valeur)s\',\'%(id)s\',\'%(operation)s\',%(sequence)s);'
+ * var MySQLqry = sprintf(qryMySQL, record); var PGSQLqry = sprintf(qryPgSQL,
+ * record); // var qry = 'insert into
+ * ubjournal(Objectname,FieldName,strFieldValueSmall,sfID,operation,sequence)
+ * VALUES (\''+table +'\',\''+champ +'\',\''+valeur +'\',\''+id
+ * +'\',\''+operation +'\','+sequence+');'; // console.log(qry); }
+ * console.log(sprintf(qryMySQL, record)); console.log(sprintf(qryPgSQL,
+ * record));
+ */
+    /*
+	 * pool.connect(function(err, client, done) { if (err) { return
+	 * console.error('error fetching client from pool', err); }
+	 * client.query(PGSQLqry, '', function(err, result) { //call `done()` to
+	 * release the client back to the pool console.log('transaction ok',
+	 * PGSQLqry); done();
+	 * 
+	 * if (err) { return console.error('error running query', err); } }); });
+	 */
 
-        var qryPgSQL = ' insert into "ubJournaling"("Objectname","FieldName","strFieldValueSmall","sfID","operation","sequence") VALUES (\'%(table)s\',\'%(champ)s\',\'%(valeur)s\',\'%(id)s\',\'%(operation)s\',%(sequence)s);'
-        var MySQLqry = sprintf(qryMySQL, record);
-        var PGSQLqry = sprintf(qryPgSQL, record);
-    }
-    if (record.champ != 'Id') {
-        var qryMySQL = 'insert into ubjournal(Objectname,FieldName,strFieldValueSmall,sfID,operation,sequence) VALUES (\'%(table)s\',\'%(champ)s\',\'%(valeur)s\',\'%(id)s\',\'%(operation)s\',%(sequence)s);'
-        var qryPgSQL = ' insert into "ubJournaling"("Objectname","FieldName","strFieldValueSmall","sfID","operation","sequence") VALUES (\'%(table)s\',\'%(champ)s\',\'%(valeur)s\',\'%(id)s\',\'%(operation)s\',%(sequence)s);'
-        var MySQLqry = sprintf(qryMySQL, record);
-        var PGSQLqry = sprintf(qryPgSQL, record);
-        // var qry = 'insert into ubjournal(Objectname,FieldName,strFieldValueSmall,sfID,operation,sequence) VALUES (\''+table +'\',\''+champ +'\',\''+valeur +'\',\''+id +'\',\''+operation +'\','+sequence+');';
-        // console.log(qry);
-    }
-    console.log(sprintf(qryMySQL, record));
-    console.log(sprintf(qryPgSQL, record)); */
-    /*pool.connect(function(err, client, done) {
-        if (err) {
-            return console.error('error fetching client from pool', err);
-        }
-        client.query(PGSQLqry, '', function(err, result) {
-            //call `done()` to release the client back to the pool 
-            console.log('transaction ok', PGSQLqry);
-            done();
-
-            if (err) {
-                return console.error('error running query', err);
-            }
-        });
-    });*/
-
-    /* connection.query(MySQLqry, function(err, rows, fields) {
-        if (!err)
-            console.log('Transaction OK: ', MySQLqry);
-        else{
-           // console.log('Error while performing Query.', err);
-        }
-    }); */
-//}
+    /*
+	 * connection.query(MySQLqry, function(err, rows, fields) { if (!err)
+	 * console.log('Transaction OK: ', MySQLqry); else{ // console.log('Error
+	 * while performing Query.', err); } });
+	 */
+// }
 
 org.authenticate({
     username: config.USERNAME,
@@ -142,7 +124,8 @@ org.authenticate({
             if (err) throw err;
             if (resp.records && resp.records.length) {
                 resp.records.forEach(function(rec) {
-                    // console.log('Pushtopic: ' + rec.get('Name') + ' ' + rec.get('query'));
+                    // console.log('Pushtopic: ' + rec.get('Name') + ' ' +
+					// rec.get('query'));
                     var str = org.stream({
                         topic: rec.get('Name'),
                         oauth: oauth
@@ -197,44 +180,38 @@ org.authenticate({
                                 console.log(resp.records[0].get('Biography_German__c'));
                             });
                         }
-                        /*for (var boucle in sfmetadata) {
-                            if (key == sfmetadata[boucle].Prefix) {
-                                var table = sfmetadata[boucle].Name;
-                                
-                                for (var field in sfmetadata[boucle].fields) {
-                                    if (sfmetadata[boucle].fields[field].fType == 'TEXTAREA') {
-                                        flds2callback.push(sfmetadata[boucle].fields[field].fName);
-                                    }
-                                }
-                                console.log('LTF', flds2callback);
-                                break;
-                            }
-                        }*/
-                        /*for (item in data.sobject) {
-                            var record = {
-                                table: table,
-                                operation: data.event.type,
-                                champ: item,
-                                valeur: data.sobject[item],
-                                sequence: data.event.replayId,
-                                id: myId
-                            }
-                        }*/
-                        /*var chkDescr = data.sobject.ubLongBioChanged__c;
-                         // console.log(chkDescr);
-                         if (chkDescr) {
-                             var what2chk = data.sobject.testMultipick__c;
-                             console.log(what2chk);
-                             checkDescription(myId, oauth, what2chk);
-                         }*/
+                        /*
+						 * for (var boucle in sfmetadata) { if (key ==
+						 * sfmetadata[boucle].Prefix) { var table =
+						 * sfmetadata[boucle].Name;
+						 * 
+						 * for (var field in sfmetadata[boucle].fields) { if
+						 * (sfmetadata[boucle].fields[field].fType ==
+						 * 'TEXTAREA') {
+						 * flds2callback.push(sfmetadata[boucle].fields[field].fName); } }
+						 * console.log('LTF', flds2callback); break; } }
+						 */
+                        /*
+						 * for (item in data.sobject) { var record = { table:
+						 * table, operation: data.event.type, champ: item,
+						 * valeur: data.sobject[item], sequence:
+						 * data.event.replayId, id: myId } }
+						 */
+                        /*
+						 * var chkDescr = data.sobject.ubLongBioChanged__c; //
+						 * console.log(chkDescr); if (chkDescr) { var what2chk =
+						 * data.sobject.testMultipick__c; console.log(what2chk);
+						 * checkDescription(myId, oauth, what2chk); }
+						 */
                         // emit the record to be displayed on the page
-                        //socket.emit('record-processed', JSON.stringify(data));
+                        // socket.emit('record-processed',
+						// JSON.stringify(data));
                     });
                 });
             }
         });
     }
-    //console.log(app.get('/Pushtopic'));
+    // console.log(app.get('/Pushtopic'));
     // subscribe to a pushtopic
 });
 app.set('port', process.env.PORT || 3001);
@@ -242,7 +219,7 @@ app.set('port', process.env.PORT || 3001);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+// app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
