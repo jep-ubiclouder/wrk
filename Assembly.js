@@ -135,7 +135,8 @@ org.authenticate({
     if (!err) {
         console.log('*** Successfully connected to Salesforce ***');
         var queryRT =  'select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive = true';
-        var allRecordtypes = org.query({
+        var allRecordtypes; 
+        org.query({
             query: queryRT,
             oauth: oauth
         }, function(err, resp) {
@@ -148,7 +149,7 @@ org.authenticate({
         		});
         		//console.log(recordTypes);
         		// console.log('infonction',resp.records);
-        		return recordTypes;
+        		allRecordtypes= recordTypes;
         	}
         });
         console.log(allRecordtypes);
