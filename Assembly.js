@@ -188,8 +188,10 @@ org.authenticate({
                         var chRTF = data.sobject.chkBioRTF__c;
                         // console.log(chBF,chBE,chBD);
                         var rtypeId = data.sobject.RecordTypeId ;
-                        
+                        console.log(rtypeId);
                         if(rtypeId){
+                        	console.log(rtypeId);
+                        	console.log(allRecordtypes);
                         	console.log(allRecordtypes[rtypeId]);
                         }
                         
