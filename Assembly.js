@@ -111,7 +111,7 @@ var fs = require('fs');
 // }
 function mapRT(org,oauth){
 	// returns a recordtype map
-	var query =  "select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive";
+	var query =  'select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive = true';
 	org.query({
         query: query,
         oauth: oauth
