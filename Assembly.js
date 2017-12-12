@@ -141,7 +141,7 @@ org.authenticate({
         }, function(err, resp) {
             if (err) throw err;
             var queryRT =  'select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive = true';
-            var allRecordtypes = org.query({
+            allRecordtypes = org.query({
                 query: queryRT,
                 oauth: oauth
             }, function(err, resp) {
