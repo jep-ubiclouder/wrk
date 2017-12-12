@@ -109,7 +109,7 @@ var fs = require('fs');
 	 * while performing Query.', err); } });
 	 */
 // }
-function getAllRt(org,oauth){
+function mapRT(org,oauth){
 	// returns a recordtype map
 	var query =  "select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive";
 	org.query({
@@ -139,7 +139,7 @@ org.authenticate({
             oauth: oauth
         }, function(err, resp) {
             if (err) throw err;
-            var allRecordtypes = getAllRT(org,oauth);
+            var allRecordtypes = mapRT(org,oauth);
             console.log(allRecordtypes);
             if (resp.records && resp.records.length) {
                 resp.records.forEach(function(rec) {
