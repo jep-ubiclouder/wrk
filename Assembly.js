@@ -147,7 +147,7 @@ org.authenticate({
             }, function(err, resp) {
             	if (err) throw err;
             	if (resp.records && resp.records.length){
-            		var recordTypes =[]:
+            		var recordTypes =[];
             		resp.records.forEach(function(rec) {
             			recordTypes.push([rec.id,rec.name,rec.Sobjecttype]);
             		}
