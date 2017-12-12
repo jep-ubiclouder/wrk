@@ -152,6 +152,7 @@ org.authenticate({
             			console.log(rec);
             			recordTypes.push([rec.get('id'),rec.get('name'),rec.get('Sobjecttype')]);
             		});
+            		console.log(recordTypes);
             		// console.log('infonction',resp.records);
             		return recordTypes;
             	}
