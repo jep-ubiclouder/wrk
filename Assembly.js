@@ -147,8 +147,12 @@ org.authenticate({
             }, function(err, resp) {
             	if (err) throw err;
             	if (resp.records && resp.records.length){
+            		var recordTypes =[]:
+            		resp.records.forEach(function(rec) {
+            			recordTypes.push([rec.id,rec.name,rec.Sobjecttype]);
+            		}
             		// console.log('infonction',resp.records);
-            		return resp.records;
+            		return recordTypes;
             	}
             });
             if (resp.records && resp.records.length) {
@@ -166,6 +170,7 @@ org.authenticate({
                         console.log('Error received from pushtopic: ' + error);
                     });
                     str.on('data', function(data) {
+                    	console.log(allRecordtypes);
                         console.log('Received the following from pushtopic:');
                         console.log(data);
                         var myId = data.sobject.Id;
