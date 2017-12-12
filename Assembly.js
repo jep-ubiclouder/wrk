@@ -149,7 +149,7 @@ org.authenticate({
             	if (resp.records && resp.records.length){
             		var recordTypes =[];
             		resp.records.forEach(function(rec) {
-            			recordTypes.push([rec.id,rec.name,rec.Sobjecttype]);
+            			recordTypes.push([rec.get('id'),rec.get('name'),rec.get('Sobjecttype')]);
             		});
             		// console.log('infonction',resp.records);
             		return recordTypes;
