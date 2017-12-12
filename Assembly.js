@@ -143,15 +143,15 @@ org.authenticate({
         	if (resp.records && resp.records.length){
         		var recordTypes =[];
         		resp.records.forEach(function(rec) {
-        			console.log(rec);
+        			// console.log(rec);
         			recordTypes.push({'id':rec.get('id'),'name':rec.get('name'),'object':rec.get('sobjecttype')});
         		});
-        		console.log(recordTypes);
+        		//console.log(recordTypes);
         		// console.log('infonction',resp.records);
         		return recordTypes;
         	}
         });
-        
+        console.log(allRecordtypes);
         
         var query = 'select id,name,query from pushtopic';
         org.query({
