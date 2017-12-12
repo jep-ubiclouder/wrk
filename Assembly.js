@@ -141,7 +141,7 @@ org.authenticate({
         }, function(err, resp) {
             if (err) throw err;
             var queryRT =  'select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive = true';
-            allRecordtypes = org.query({
+            var allRecordtypes = org.query({
                 query: queryRT,
                 oauth: oauth
             }, function(err, resp) {
@@ -150,7 +150,7 @@ org.authenticate({
             		var recordTypes =[];
             		resp.records.forEach(function(rec) {
             			console.log(rec);
-            			recordTypes.push([rec.get('id'),rec.get('name'),rec.get('Sobjecttype')]);
+            			recordTypes.push({'id':rec.get('id'),'name':rec.get('name'),'object':rec.get('sobjecttype')});
             		});
             		console.log(recordTypes);
             		// console.log('infonction',resp.records);
@@ -172,7 +172,7 @@ org.authenticate({
                         console.log('Error received from pushtopic: ' + error);
                     });
                     str.on('data', function(data) {
-                    	console.log(allRecordtypes);
+                    	console.log(this.allRecordtypes);
                         console.log('Received the following from pushtopic:');
                         console.log(data);
                         var myId = data.sobject.Id;
