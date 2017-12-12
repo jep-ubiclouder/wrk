@@ -140,8 +140,17 @@ org.authenticate({
             oauth: oauth
         }, function(err, resp) {
             if (err) throw err;
-            var allRecordtypes = mapRT(org,oauth);
-            console.log(allRecordtypes);
+            var queryRT =  'select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive = true';
+            var allRecordtypes = org.query({
+                query: query,
+                oauth: oauth
+            }, function(err, resp) {
+            	if (err) throw err;
+            	if (resp.records && resp.records.length){
+            		// console.log('infonction',resp.records);
+            		return resp.records;
+            	}
+            });
             if (resp.records && resp.records.length) {
                 resp.records.forEach(function(rec) {
                     // console.log('Pushtopic: ' + rec.get('Name') + ' ' +
