@@ -141,7 +141,7 @@ org.authenticate({
         }, function(err, resp) {
             if (err) throw err;
             var queryRT =  'select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive = true';
-            var allRecordtypes = org.query({
+            global.allRecordtypes = org.query({
                 query: queryRT,
                 oauth: oauth
             }, function(err, resp) {
@@ -172,7 +172,7 @@ org.authenticate({
                         console.log('Error received from pushtopic: ' + error);
                     });
                     str.on('data', function(data) {
-                    	console.log(this.allRecordtypes);
+                    	console.log(allRecordtypes);
                         console.log('Received the following from pushtopic:');
                         console.log(data);
                         var myId = data.sobject.Id;
