@@ -135,7 +135,7 @@ org.authenticate({
     if (!err) {
         console.log('*** Successfully connected to Salesforce ***');
         var queryRT =  'select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive = true';
-        var allRecordtypes; 
+        var allRecordtypes=1; 
         org.query({
             query: queryRT,
             oauth: oauth
