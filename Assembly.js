@@ -145,8 +145,30 @@ org.authenticate({
                         var chBF = data.sobject.chkBioF__c;
                         var chBE = data.sobject.chkBioE__c;
                         var chBD = data.sobject.chkBioD__c;
+                        var chRTF = data.sobject.chkBioRTF__c;
                         // console.log(chBF,chBE,chBD);
-
+                        
+                        if(chRTF){
+                        	var q = "select id, Formatted_Text_Element__c from Biography__c where Id='"+myId +"'";
+                            console.log(q);
+                            org.query({
+                                oauth:oauth,
+                                query : q
+                            } , function(err,resp){
+                                // console.log(resp);
+                                // console.log(resp.records[0].get('Biography_French__c'));
+                                var b = {'Id':myId, 'Formatted_Text_Element__c': resp.records[0].get('Formatted_Text_Element__c')};
+                                console.log(JSON.stringify(b));
+                                var bio = nforce.createSObject('Biography__c');
+                                bio.set('Id',myId);
+                                bio.set('chkBioRTF__c',false);
+                                org.update({sobject:bio, oauth:oauth}, function(err, r){
+                                	  if(!err) console.log('It worked!');
+                                });
+                            });
+                        	
+                        }
+                        
                         if (chBF){
                             var q = "select id, Biography_French__c from Biography__c where Id='"+myId +"'";
                             console.log(q);
