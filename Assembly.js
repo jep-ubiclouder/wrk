@@ -118,6 +118,7 @@ function mapRT(org,oauth){
     }, function(err, resp) {
     	if (err) throw err;
     	if (resp.records && resp.records.length){
+    		console.log('infonction',resp.records);
     		return resp.records;
     	}
     	
