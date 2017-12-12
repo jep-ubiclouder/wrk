@@ -36,6 +36,7 @@ var org = nforce.createConnection({
 									// production default
 });
 
+
 // meta donées de SF
 var fs = require('fs');
 // var sfmetadata = JSON.parse(fs.readFileSync('./sfMetadata.json', 'utf8'));
@@ -108,6 +109,22 @@ var fs = require('fs');
 	 * while performing Query.', err); } });
 	 */
 // }
+function getAllRt(org,oauth){
+	// returns a recordtype map
+	var query =  "select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive";
+	org.query({
+        query: query,
+        oauth: oauth
+    }, function(err, resp) {
+    	if (err) throw err;
+    	if (resp.records && resp.records.length){
+    		return resp.records;
+    	}
+    	
+    });
+}
+
+
 
 org.authenticate({
     username: config.USERNAME,
@@ -122,6 +139,8 @@ org.authenticate({
             oauth: oauth
         }, function(err, resp) {
             if (err) throw err;
+            var allRecordtypes = getAllRT(org,oauth);
+            console.log(allRecordtypes);
             if (resp.records && resp.records.length) {
                 resp.records.forEach(function(rec) {
                     // console.log('Pushtopic: ' + rec.get('Name') + ' ' +
