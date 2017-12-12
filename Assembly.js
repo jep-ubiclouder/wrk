@@ -187,6 +187,11 @@ org.authenticate({
                         var chBD = data.sobject.chkBioD__c;
                         var chRTF = data.sobject.chkBioRTF__c;
                         // console.log(chBF,chBE,chBD);
+                        var rtypeId = data.sobject.RecordTypeId ;
+                        
+                        if(rtypeId){
+                        	console.log(allRecordtypes[rtypeId]);
+                        }
                         
                         if(chRTF){
                         	var q = "select id, Formatted_Text_Element__c from Biography__c where Id='"+myId +"'";
