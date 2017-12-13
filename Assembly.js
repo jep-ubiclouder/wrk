@@ -138,7 +138,7 @@ const  getLT = async (org,oauth,field,myId) => {
 	        }
 		);
 		
-	console.log('resultSQL',resultSQL);
+	// console.log('resultSQL',resultSQL);
 	// console.log('b',b);
 	return resultSQL
 }
@@ -269,8 +269,10 @@ org.authenticate({
                         }
                         
                         if(chRTF){
-                        	 var t = getLT(org,oauth,'Formatted_Text_Element__c',myId);
-                        	 console.log('t',t)
+                        	getLT(org,oauth,'Formatted_Text_Element__c',myId).then((resp) => {
+                        		console.log(resp);
+                        	});
+                        	 
                         	 
                         		/*.then((b)=>	function(b){
                         						console.log('in then',b);
