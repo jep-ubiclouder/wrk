@@ -126,7 +126,7 @@ function mapRT(org,oauth){
 }
 
 var getLTF= function(org,oauth,field,myId){
-	return new Promise(resolve,reject)=>{
+	return  Promise(resolve,reject)=>{
 		var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
 	    console.log(q);
 	    org.query({
