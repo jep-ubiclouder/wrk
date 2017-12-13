@@ -128,16 +128,8 @@ const  getLT = async (org,oauth,field,myId) => {
 	var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
 	//var b = 1;
 	console.log('in getLT',q);
-	const resultSQL =	await org.query({
-	        oauth:oauth,
-	        query : q
-	    }	, function(err,resp){	    	
-	    	if (err) return err;
-	        var b = {'field':field, 'value': resp.records[0].get(field)};
-	        console.log(b);
-	        return b;       
-	        }
-		);
+	const resultSQL =	await getLTF(org,oauth,field,myId) 
+		
 	return resultSQL;
 }
 const getLTF= function(org,oauth,field,myId){
