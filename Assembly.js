@@ -33,7 +33,7 @@ var org = nforce.createConnection({
     redirectUri: config.CALLBACK_URL + '/oauth/_callback',
     mode: 'multi',
     environment: config.ENVIRONMENT // optional, sandbox or production,
-									// production default
+    // production default
 });
 
 
@@ -93,69 +93,74 @@ var fs = require('fs');
  * console.log(sprintf(qryMySQL, record)); console.log(sprintf(qryPgSQL,
  * record));
  */
-    /*
-	 * pool.connect(function(err, client, done) { if (err) { return
-	 * console.error('error fetching client from pool', err); }
-	 * client.query(PGSQLqry, '', function(err, result) { //call `done()` to
-	 * release the client back to the pool console.log('transaction ok',
-	 * PGSQLqry); done();
-	 * 
-	 * if (err) { return console.error('error running query', err); } }); });
-	 */
+/*
+ * pool.connect(function(err, client, done) { if (err) { return
+ * console.error('error fetching client from pool', err); }
+ * client.query(PGSQLqry, '', function(err, result) { //call `done()` to
+ * release the client back to the pool console.log('transaction ok',
+ * PGSQLqry); done();
+ * 
+ * if (err) { return console.error('error running query', err); } }); });
+ */
 
-    /*
-	 * connection.query(MySQLqry, function(err, rows, fields) { if (!err)
-	 * console.log('Transaction OK: ', MySQLqry); else{ // console.log('Error
-	 * while performing Query.', err); } });
-	 */
+/*
+ * connection.query(MySQLqry, function(err, rows, fields) { if (!err)
+ * console.log('Transaction OK: ', MySQLqry); else{ // console.log('Error
+ * while performing Query.', err); } });
+ */
 // }
-function mapRT(org,oauth){
-	// returns a recordtype map
-	var query =  'select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive = true';
-	org.query({
+function mapRT(org, oauth) {
+    // returns a recordtype map
+    var query = 'select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive = true';
+    org.query({
         query: query,
         oauth: oauth
     }, function(err, resp) {
-    	if (err) throw err;
-    	if (resp.records && resp.records.length){
-    		console.log('infonction',resp.records);
-    		return resp.records;
-    	}
-    	
+        if (err) throw err;
+        if (resp.records && resp.records.length) {
+            console.log('infonction', resp.records);
+            return resp.records;
+        }
+
     });
 }
-const  getLT = async (org,oauth,field,myId) => {
-	var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
-	//var b = 1;
-	console.log('in getLT',q);
-	const resultSQL =	await getLTF(org,oauth,field,myId) 
-		
-	return resultSQL;
+const getLT = async (org, oauth, field, myId) => {
+    var q = "select id," + field + "  from Biography__c where Id='" + myId + "'";
+    //var b = 1;
+    console.log('in getLT', q);
+    const resultSQL = await getLTF(org, oauth, field, myId)
+
+    return resultSQL;
 }
-const getLTF= function(org,oauth,field,myId){
-	return new Promise((resolve,reject)=>{
-		var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
-	    //console.log(q);
-	    org.query({
-	        oauth:oauth,
-	        query : q
-	    } , function(err,resp){
-	    	
-	    	if (err) return reject(err);
-	        var b = {'field':field, 'value': resp.records[0].get(field)};
-	        console.log(b);
-	     
-	        var bio = nforce.createSObject('Biography__c');
-	        bio.set('Id',myId);
-	        bio.set('chkBioRTF__c',false);
-	        
-	        org.update({sobject:bio, oauth:oauth}, function(err, r){
-	        	  if(!err) console.log('It worked!');
-	        });
-	        resolve(b);
-	    	}
-	    )
-	})
+const getLTF = function(org, oauth, field, myId) {
+    return new Promise((resolve, reject) => {
+        var q = "select id," + field + "  from Biography__c where Id='" + myId + "'";
+        //console.log(q);
+        org.query({
+            oauth: oauth,
+            query: q
+        }, function(err, resp) {
+
+            if (err) return reject(err);
+            var b = {
+                'field': field,
+                'value': resp.records[0].get(field)
+            };
+            console.log(b);
+
+            var bio = nforce.createSObject('Biography__c');
+            bio.set('Id', myId);
+            bio.set('chkBioRTF__c', false);
+
+            org.update({
+                sobject: bio,
+                oauth: oauth
+            }, function(err, r) {
+                if (!err) console.log('It worked!');
+            });
+            resolve(b);
+        })
+    })
 }
 
 org.authenticate({
@@ -165,44 +170,52 @@ org.authenticate({
     if (err) return console.log(err);
     if (!err) {
         console.log('*** Successfully connected to Salesforce ***');
-        
-        
+
+
         /*
          Un catalogue des prefixes pour trouver les noms d'objets
          */
         var querySchema = 'Select QualifiedApiName, MasterLabel, Label, KeyPrefix From EntityDefinition';
-        var globalSchema =  1;
+        var globalSchema = 1;
         org.query({
             query: querySchema,
             oauth: oauth
-        },function(err,resp){
-        	if (err) throw err;
-        	if (resp.records && resp.records.length){
-        		var recordTypes ={};
-        		resp.records.forEach(function(rec) {
-        			recordTypes[rec.get('KeyPrefix')] = {'QualifiedApiName':rec.get('QualifiedApiName'),'Label':rec.get('Label'),'MasterLabel':rec.get('MasterLabel')};
-        		});
-        		globalSchema = recordTypes;
-        		}
+        }, function(err, resp) {
+            if (err) throw err;
+            if (resp.records && resp.records.length) {
+                var recordTypes = {};
+                resp.records.forEach(function(rec) {
+                    recordTypes[rec.get('KeyPrefix')] = {
+                        'QualifiedApiName': rec.get('QualifiedApiName'),
+                        'Label': rec.get('Label'),
+                        'MasterLabel': rec.get('MasterLabel')
+                    };
+                });
+                globalSchema = recordTypes;
+            }
         });
-        
+
         /*
          * Catalogues des recordtypes
          */
-        var queryRT =  'select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive = true';
-        var allRecordtypes=1; 
+        var queryRT = 'select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive = true';
+        var allRecordtypes = 1;
         org.query({
             query: queryRT,
             oauth: oauth
         }, function(err, resp) {
-        	if (err) throw err;
-        	if (resp.records && resp.records.length){
-        		var recordTypes ={};
-        		resp.records.forEach(function(rec) {
-        			recordTypes[rec.get('id').slice(0,15)]={'id':rec.get('id'),'name':rec.get('name'),'object':rec.get('sobjecttype')};
-        		});
-        		allRecordtypes= recordTypes;
-        	}
+            if (err) throw err;
+            if (resp.records && resp.records.length) {
+                var recordTypes = {};
+                resp.records.forEach(function(rec) {
+                    recordTypes[rec.get('id').slice(0, 15)] = {
+                        'id': rec.get('id'),
+                        'name': rec.get('name'),
+                        'object': rec.get('sobjecttype')
+                    };
+                });
+                allRecordtypes = recordTypes;
+            }
         });
 
         var query = 'select id,name,query from pushtopic';
@@ -215,7 +228,7 @@ org.authenticate({
             if (resp.records && resp.records.length) {
                 resp.records.forEach(function(rec) {
                     // console.log('Pushtopic: ' + rec.get('Name') + ' ' +
-					// rec.get('query'));
+                    // rec.get('query'));
                     var str = org.stream({
                         topic: rec.get('Name'),
                         oauth: oauth
@@ -227,16 +240,19 @@ org.authenticate({
                         console.log('Error received from pushtopic: ' + error);
                     });
                     str.on('data', function(data) {
-                    	// console.log(allRecordtypes);
+                        // console.log(allRecordtypes);
                         //console.log('Received the following from pushtopic:');
                         //console.log(data);
-                        var result ={}
-                        
+                        var result = {}
+
                         result['data'] = data.sobject;
                         result['event'] = data.event;
-                        result['meta'] ={'sobject':' ','recordtype':null}; // si le recordtype existe , il sera géré
-                        result['additional'] =[] ;
-                        
+                        result['meta'] = {
+                            'sobject': ' ',
+                            'recordtype': null
+                        }; // si le recordtype existe , il sera géré
+                        result['additional'] = [];
+
                         var myId = data.sobject.Id;
                         var key = myId.substring(0, 3);
                         var flds2callback = [];
@@ -245,85 +261,55 @@ org.authenticate({
                         var chBD = data.sobject.chkBioD__c;
                         var chRTF = data.sobject.chkBioRTF__c;
                         // console.log(chBF,chBE,chBD);
-                        var rtypeId = data.sobject.RecordTypeId ;
-                        
-                        var prefix = myId.slice(0,3);
-                        if(globalSchema[prefix]){
-                        	result['meta']['sobject'] = globalSchema[prefix]['MasterLabel'];
+                        var rtypeId = data.sobject.RecordTypeId;
+
+                        var prefix = myId.slice(0, 3);
+                        if (globalSchema[prefix]) {
+                            result['meta']['sobject'] = globalSchema[prefix]['MasterLabel'];
                         }
                         //console.log(rtypeId);
-                        if(rtypeId){
-                        	console.log(rtypeId);
-                         	console.log(allRecordtypes[rtypeId]);
-                         	result['meta']['recordtype'] = allRecordtypes[rtypeId]['name'];
-                        }
-                        
-                        if(chRTF){
-                        	getLT(org,oauth,'Formatted_Text_Element__c',myId).then((resp) => {                        		
-                        		console.log('back from async',resp );
-                        		result['additional'].push(b);
-                        	});
-                        }
-                        if (chBF){
-                        	getLT(org,oauth,'Biography_French__c',myId).then((resp) => {
-                        		console.log('back from async',resp );
-                        		result['additional'].push(b);
-                        	});
-                        }
-                        if (chBE){
-                        	getLT(org,oauth,'Biography_English__c',myId).then((resp) => {
-                        		console.log('back from async',resp );
-                        		result['additional'].push(b);
-                        	});
+                        if (rtypeId) {
+                            console.log(rtypeId);
+                            console.log(allRecordtypes[rtypeId]);
+                            result['meta']['recordtype'] = allRecordtypes[rtypeId]['name'];
                         }
 
-                        if (chBD){
-                        	getLT(org,oauth,'Biography_German__c',myId).then((resp) => {
-                        		console.log('back from async',resp );
-                        		result['additional'].push(b);
-                        	});
+                        if (chRTF) {
+                            getLT(org, oauth, 'Formatted_Text_Element__c', myId).then((resp) => {
+                                console.log('back from async', resp);
+                                result['additional'].push(resp);
+                            });
                         }
-                        	/*getLTF(org,oauth,'Biography_German__c',myId)
-                    		.then((b)=>	function(b){
-                    						console.log('in then',b);
-                    						result['additional'].push(b)
-                    				})
-                    		.catch((err) => function(err){console.log(err)});
-                        	
-                            var q = "select id, Biography_German__c from Biography__c where Id = '"+myId +"'";
-                            console.log(q);
-                            org.query({
-                                oauth:oauth,
-                                query :q
-                            } , function(err,resp){
-                                //console.log(resp.records[0].get('Biography_German__c'));
-                                var b = {'field':'Biography_German__c', 'value': resp.records[0].get('Biography_German__c')};
-                                console.log(b);
-                                var bio = nforce.createSObject('Biography__c');
-                                bio.set('Id',myId);
-                                bio.set('chkBioD__c',false);
-                                org.update({sobject:bio, oauth:oauth}, function(err, r){
-                                	  if(!err) console.log('It worked!');
-                                });
-                                result['additional'].push(b);
-                            });*/
-                        
-                        //console.log(JSON.stringify(result));
+                        if (chBF) {
+                            getLT(org, oauth, 'Biography_French__c', myId).then((resp) => {
+                                console.log('back from async', resp);
+                                result['additional'].push(resp);
+                            });
+                        }
+                        if (chBE) {
+                            getLT(org, oauth, 'Biography_English__c', myId).then((resp) => {
+                                console.log('back from async', resp);
+                                result['additional'].push(resp);
+                            });
+                        }
+
+                        if (chBD) {
+                            getLT(org, oauth, 'Biography_German__c', myId).then((resp) => {
+                                console.log('back from async', resp);
+                                result['additional'].push(resp);
+                            });
+                        }
                         console.log(result);
-                     });
+                    });
                 });
             }
         });
     }
-    // console.log(app.get('/Pushtopic'));
-    // subscribe to a pushtopic
 });
 app.set('port', process.env.PORT || 3001);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
-// uncomment after placing your favicon in /public
-// app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
