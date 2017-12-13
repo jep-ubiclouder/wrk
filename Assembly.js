@@ -136,7 +136,7 @@ const  getLT = async (org,oauth,field,myId) => {
 	    	
 	    	if (err) return err;
 	        var b = {'field':field, 'value': resp.records[0].get(field)};
-	        console.log(b);	        
+	        // console.log(b);	        
 	        }
 		);
 		return b;
@@ -144,6 +144,8 @@ const  getLT = async (org,oauth,field,myId) => {
 	catch (err){
 		console.log(err);
 	} 
+	console.log('resultSQL',resultSQL);
+	console.log('b',b);
 	return resultSQL
 }
 const getLTF= function(org,oauth,field,myId){
