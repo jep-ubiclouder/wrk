@@ -218,7 +218,7 @@ org.authenticate({
                         
                         var prefix = myId.slice(0,3);
                         if(globalSchema[prefix]){
-                        	result['meta']['sobject'] = globalSchema[prefix].get('globalSchema[prefix]');
+                        	result['meta']['sobject'] = globalSchema[prefix]['MasterLabel']);
                         }
                         //console.log(rtypeId);
                         if(rtypeId){
