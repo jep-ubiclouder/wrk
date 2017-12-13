@@ -269,7 +269,7 @@ org.authenticate({
                         if(chRTF){
                         	getLT(org,oauth,'Formatted_Text_Element__c',myId).then((resp) => {
                         		
-                        		console.log(resp);
+                        		console.log('back from async');
                         	});
                         	 
                         	 
