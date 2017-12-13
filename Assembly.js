@@ -235,7 +235,7 @@ org.authenticate({
                                 query : q
                             } , function(err,resp){
                                 var b = {'field':'Formatted_Text_Element__c', 'value': resp.records[0].get('Formatted_Text_Element__c')};
-                                
+                                console.log(b);
                                 var bio = nforce.createSObject('Biography__c');
                                 bio.set('Id',myId);
                                 bio.set('chkBioRTF__c',false);
@@ -253,7 +253,7 @@ org.authenticate({
                                 query : q
                             } , function(err,resp){
                                 var b = {'field':'Biography_French__c', 'value': resp.records[0].get('Biography_French__c')};
-                                
+                                console.log(b);
                                 var bio = nforce.createSObject('Biography__c');
                                 bio.set('Id',myId);
                                 bio.set('chkBioF__c',false);
@@ -272,7 +272,7 @@ org.authenticate({
                             } , function(err,resp){
                                 console.log(resp.records[0].get('Biography_English__c'));
                                 var b = {'field':'Biography_English__c', 'value': resp.records[0].get('Biography_English__c')};
-                                
+                                console.log(b);
                                 var bio = nforce.createSObject('Biography__c');
                                 bio.set('Id',myId);
                                 bio.set('chkBioE__c',false);
@@ -291,7 +291,7 @@ org.authenticate({
                             } , function(err,resp){
                                 //console.log(resp.records[0].get('Biography_German__c'));
                                 var b = {'field':'Biography_German__c', 'value': resp.records[0].get('Biography_German__c')};
-                                
+                                console.log(b);
                                 var bio = nforce.createSObject('Biography__c');
                                 bio.set('Id',myId);
                                 bio.set('chkBioD__c',false);
