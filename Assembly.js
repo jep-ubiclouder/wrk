@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var Promise = require('promise');
+// var Promise = require('promise');
 
 var config = require('./config.js');
 // plugin SF
@@ -125,7 +125,7 @@ function mapRT(org,oauth){
     });
 }
 
-var getLTF= function(org,oauth,field,myId){
+const getLTF= function(org,oauth,field,myId){
 	return new Promise((resolve,reject)=>{
 		var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
 	    //console.log(q);
