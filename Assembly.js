@@ -124,15 +124,15 @@ function mapRT(org, oauth) {
 
     });
 }
-const getLT = async (org, oauth, field, myId) => {
+const getLT = async (org, oauth, field, myId,chkFld) => {
     var q = "select id," + field + "  from Biography__c where Id='" + myId + "'";
     //var b = 1;
     console.log('in getLT', q);
-    const resultSQL = await getLTF(org, oauth, field, myId)
+    const resultSQL = await getLTF(org, oauth, field, myId,chkFld);
 
     return resultSQL;
 }
-const getLTF = function(org, oauth, field, myId) {
+const getLTF = function(org, oauth, field, myId,chkFld) {
     return new Promise((resolve, reject) => {
         var q = "select id," + field + "  from Biography__c where Id='" + myId + "'";
         //console.log(q);
@@ -275,26 +275,26 @@ org.authenticate({
                         }
 
                         if (chRTF) {
-                            getLT(org, oauth, 'Formatted_Text_Element__c', myId).then((resp) => {
+                            getLT(org, oauth, 'Formatted_Text_Element__c', myId,'chkBioRTF__c').then((resp) => {
                                 console.log('back from async', resp);
                                 result['additional'].push(resp);
                             });
                         }
                         if (chBF) {
-                            getLT(org, oauth, 'Biography_French__c', myId).then((resp) => {
+                            getLT(org, oauth, 'Biography_French__c', myId,'chkBioF__c').then((resp) => {
                                 console.log('back from async', resp);
                                 result['additional'].push(resp);
                             });
                         }
                         if (chBE) {
-                            getLT(org, oauth, 'Biography_English__c', myId).then((resp) => {
+                            getLT(org, oauth, 'Biography_English__c', myId,'chkBioE__c').then((resp) => {
                                 console.log('back from async', resp);
                                 result['additional'].push(resp);
                             });
                         }
 
                         if (chBD) {
-                            getLT(org, oauth, 'Biography_German__c', myId).then((resp) => {
+                            getLT(org, oauth, 'Biography_German__c', myId,'chkBioD__c').then((resp) => {
                                 console.log('back from async', resp);
                                 result['additional'].push(resp);
                             });
