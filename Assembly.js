@@ -124,7 +124,7 @@ function mapRT(org,oauth){
     	
     });
 }
-async function getLT (org,oauth,field,myId){
+async  getLT (org,oauth,field,myId){
 	var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
 	var b = 1
 	let resultSQL
