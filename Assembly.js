@@ -136,7 +136,7 @@ var getLTF= function(org,oauth,field,myId){
 	    	
 	    	if (err) return reject(err);
 	        var b = {'field':field, 'value': resp.records[0].get(field)};
-	        //console.log(b);
+	        console.log(b);
 	     
 	        var bio = nforce.createSObject('Biography__c');
 	        bio.set('Id',myId);
