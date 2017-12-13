@@ -299,7 +299,7 @@ org.authenticate({
                             });
                         }
                         console.log(JSON.stringify(result));
-                        
+                        console.log(result);
                      });
                 });
             }
