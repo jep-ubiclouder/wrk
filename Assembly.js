@@ -134,13 +134,11 @@ const  getLT = async (org,oauth,field,myId) => {
 	    }	, function(err,resp){	    	
 	    	if (err) return err;
 	        var b = {'field':field, 'value': resp.records[0].get(field)};
-	        return {'field':field, 'value': resp.records[0].get(field)};       
+	        console.log(b);
+	        return b;       
 	        }
 		);
-		
-	// console.log('resultSQL',resultSQL);
-	// console.log('b',b);
-	return resultSQL
+	return resultSQL;
 }
 const getLTF= function(org,oauth,field,myId){
 	return new Promise((resolve,reject)=>{
@@ -270,6 +268,7 @@ org.authenticate({
                         
                         if(chRTF){
                         	getLT(org,oauth,'Formatted_Text_Element__c',myId).then((resp) => {
+                        		
                         		console.log(resp);
                         	});
                         	 
