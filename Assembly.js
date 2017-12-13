@@ -125,26 +125,30 @@ function mapRT(org,oauth){
     });
 }
 
-const getLTF= function(org,oauth,field,myId){
-	var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
-    console.log(q);
-    org.query({
-        oauth:oauth,
-        query : q
-    } , function(err,resp){
-        var b = {'field':field, 'value': resp.records[0].get(field)};
-        console.log(b);
-        
-        var bio = nforce.createSObject('Biography__c');
-        bio.set('Id',myId);
-        bio.set('chkBioRTF__c',false);
-        
-        org.update({sobject:bio, oauth:oauth}, function(err, r){
-        	  if(!err) console.log('It worked!');
-        });
-        return b
-    })
-
+var getLTF= function(org,oauth,field,myId){
+	return new Promise( function (resolve,reject){
+		var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
+	    console.log(q);
+	    org.query({
+	        oauth:oauth,
+	        query : q
+	    } , function(err,resp){
+	    	
+	    	if (err) return reject(err);
+	        var b = {'field':field, 'value': resp.records[0].get(field)};
+	        console.log(b);
+	        
+	        var bio = nforce.createSObject('Biography__c');
+	        bio.set('Id',myId);
+	        bio.set('chkBioRTF__c',false);
+	        
+	        org.update({sobject:bio, oauth:oauth}, function(err, r){
+	        	  if(!err) console.log('It worked!');
+	        });
+	        resolve(b);
+	    	}
+	    )
+	}
 }
 
 org.authenticate({
@@ -253,7 +257,7 @@ org.authenticate({
                         				result['additional'].push(b)
                         				}
                         			)
-                        			}
+                        		}
 
                         
                         if (chBF){
