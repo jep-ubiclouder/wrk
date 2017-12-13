@@ -144,14 +144,14 @@ const getLTF= function(org,oauth,field,myId){
 	    	if (err) return reject(err);
 	        var b = {'field':field, 'value': resp.records[0].get(field)};
 	        console.log(b);
-	     /*
+	     /
 	        var bio = nforce.createSObject('Biography__c');
 	        bio.set('Id',myId);
 	        bio.set('chkBioRTF__c',false);
 	        
 	        org.update({sobject:bio, oauth:oauth}, function(err, r){
 	        	  if(!err) console.log('It worked!');
-	        });*/
+	        });
 	        resolve(b);
 	    	}
 	    )
@@ -259,83 +259,37 @@ org.authenticate({
                         }
                         
                         if(chRTF){
-                        	getLT(org,oauth,'Formatted_Text_Element__c',myId).then((resp) => {
-                        		
+                        	getLT(org,oauth,'Formatted_Text_Element__c',myId).then((resp) => {                        		
                         		console.log('back from async',resp );
                         		result['additional'].push(b);
                         	});
-                        	 
-                        	 
-                        		/*.then((b)=>	function(b){
-                        						console.log('in then',b);
-                        						result['additional'].push(b)
-                        				})
-                        		.catch((err) => function(err){console.log(err)}); */ 
                         }
-                        console.log(result);
-
-                        
                         if (chBF){
-                        	getLTF(org,oauth,'Biography_French__c',myId)
+                        	getLT(org,oauth,'Biography_French__c',myId).then((resp) => {
+                        		console.log('back from async',resp );
+                        		result['additional'].push(b);
+                        	});
+                        }
+                        if (chBE){
+                        	getLT(org,oauth,'Biography_English__c',myId).then((resp) => {
+                        		console.log('back from async',resp );
+                        		result['additional'].push(b);
+                        	});
+                        }
+
+                        if (chBD){
+                        	getLT(org,oauth,'Biography_German__c',myId).then((resp) => {
+                        		console.log('back from async',resp );
+                        		result['additional'].push(b);
+                        	});
+                        }
+                        	/*getLTF(org,oauth,'Biography_German__c',myId)
                     		.then((b)=>	function(b){
                     						console.log('in then',b);
                     						result['additional'].push(b)
                     				})
                     		.catch((err) => function(err){console.log(err)});
                         	
-                        	/*
-                            var q = "select id,  from Biography__c where Id='"+myId +"'";
-                            console.log(q);
-                            org.query({
-                                oauth:oauth,
-                                query : q
-                            } , function(err,resp){
-                                var b = {'field':'Biography_French__c', 'value': resp.records[0].get('Biography_French__c')};
-                                console.log(b);
-                                var bio = nforce.createSObject('Biography__c');
-                                bio.set('Id',myId);
-                                bio.set('chkBioF__c',false);
-                                org.update({sobject:bio, oauth:oauth}, function(err, r){
-                                	  if(!err) console.log('It worked!');
-                                });
-                                result['additional'].push(b);
-                            });*/
-                        }
-                        if (chBE){
-                        	getLTF(org,oauth,'Biography_English__c',myId)
-                    		.then((b)=>	function(b){
-                    						console.log('in then',b);
-                    						result['additional'].push(b)
-                    				})
-                    		.catch((err) => function(err){console.log(err)});
-                        	                        	
-                        	/*
-                            var q = "select id, Biography_English__c from Biography__c where Id = '"+myId +"'";
-                            console.log(q);
-                            org.query({
-                                oauth:oauth,
-                                query :q
-                            } , function(err,resp){
-                                console.log(resp.records[0].get('Biography_English__c'));
-                                var b = {'field':'Biography_English__c', 'value': resp.records[0].get('Biography_English__c')};
-                                console.log(b);
-                                var bio = nforce.createSObject('Biography__c');
-                                bio.set('Id',myId);
-                                bio.set('chkBioE__c',false);
-                                org.update({sobject:bio, oauth:oauth}, function(err, r){
-                                	  if(!err) console.log('It worked!');
-                                });
-                                result['additional'].push(b);
-                            });*/
-                        }
-                        if (chBD){
-                        	getLTF(org,oauth,'Biography_German__c',myId)
-                    		.then((b)=>	function(b){
-                    						console.log('in then',b);
-                    						result['additional'].push(b)
-                    				})
-                    		.catch((err) => function(err){console.log(err)});
-                        	/*
                             var q = "select id, Biography_German__c from Biography__c where Id = '"+myId +"'";
                             console.log(q);
                             org.query({
