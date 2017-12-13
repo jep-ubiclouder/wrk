@@ -134,6 +134,30 @@ org.authenticate({
     if (err) return console.log(err);
     if (!err) {
         console.log('*** Successfully connected to Salesforce ***');
+        
+        
+        /*
+         Un catalogue des prefixes pour trouver les noms d'objets
+         */
+        var querySchema = 'Select QualifiedApiName, MasterLabel, Label, KeyPrefix, From EntityDefinition';
+        var globalSchema =  1;
+        org.query({
+            query: querySchema,
+            oauth: oauth
+        },function(err,resp){
+        	if (err) throw err;
+        	if (resp.records && resp.records.length){
+        		var recordTypes ={};
+        		resp.records.forEach(function(rec) {
+        			recordTypes[rec.get('KeyPrefix')] = {'QualifiedApiName':rec.get('QualifiedApiName'),'':rec.get('Label'),'':rec.get('Label')};
+        		});
+        		globalSchema = recordTypes;
+        		}
+        });
+        
+        /*
+         * Catalogues des recordtypes
+         */
         var queryRT =  'select Id,IsActive,Name,NamespacePrefix,SobjectType FROM RecordType where isActive = true';
         var allRecordtypes=1; 
         org.query({
@@ -144,18 +168,12 @@ org.authenticate({
         	if (resp.records && resp.records.length){
         		var recordTypes ={};
         		resp.records.forEach(function(rec) {
-        			// console.log(rec);
-        			// console.log(rec.get('id').length);
-        			
         			recordTypes[rec.get('id').slice(0,15)]={'id':rec.get('id'),'name':rec.get('name'),'object':rec.get('sobjecttype')};
         		});
-        		//console.log(recordTypes);
-        		// console.log('infonction',resp.records);
         		allRecordtypes= recordTypes;
         	}
         });
-        console.log(allRecordtypes);
-        
+
         var query = 'select id,name,query from pushtopic';
         org.query({
             query: query,
@@ -178,9 +196,16 @@ org.authenticate({
                         console.log('Error received from pushtopic: ' + error);
                     });
                     str.on('data', function(data) {
-                    	//console.log(allRecordtypes);
+                    	// console.log(allRecordtypes);
                         console.log('Received the following from pushtopic:');
                         console.log(data);
+                        var result ={}
+                        
+                        result['data'] = data.sobject;
+                        result['event'] = data.event;
+                        result['meta'] ={'sobject':' ','recordtype':null}; // si le recordtype existe , il sera géré
+                        result['additional'] =[] ;
+                        
                         var myId = data.sobject.Id;
                         var key = myId.substring(0, 3);
                         var flds2callback = [];
@@ -190,11 +215,16 @@ org.authenticate({
                         var chRTF = data.sobject.chkBioRTF__c;
                         // console.log(chBF,chBE,chBD);
                         var rtypeId = data.sobject.RecordTypeId ;
-                        console.log(rtypeId);
+                        
+                        var prefix = myId.slice(0,3);
+                        if(globalSchema[prefix]){
+                        	result['meta']['sobject'] = globalSchema[prefix].get('globalSchema[prefix]');
+                        }
+                        //console.log(rtypeId);
                         if(rtypeId){
                         	console.log(rtypeId);
-                        	// console.log(allRecordtypes);
-                        	console.log(allRecordtypes[rtypeId]);
+                         	console.log(allRecordtypes[rtypeId]);
+                         	result['meta']['recordtype'] = allRecordtypes[rtypeId]['name'];
                         }
                         
                         if(chRTF){
@@ -204,10 +234,8 @@ org.authenticate({
                                 oauth:oauth,
                                 query : q
                             } , function(err,resp){
-                                // console.log(resp);
-                                // console.log(resp.records[0].get('Biography_French__c'));
-                                var b = {'Id':myId, 'Formatted_Text_Element__c': resp.records[0].get('Formatted_Text_Element__c')};
-                                console.log(JSON.stringify(b));
+                                var b = {'field':'Formatted_Text_Element__c', 'value': resp.records[0].get('Formatted_Text_Element__c')};
+                                result['additionnal'].push(b);
                                 var bio = nforce.createSObject('Biography__c');
                                 bio.set('Id',myId);
                                 bio.set('chkBioRTF__c',false);
@@ -215,9 +243,7 @@ org.authenticate({
                                 	  if(!err) console.log('It worked!');
                                 });
                             });
-                        	
                         }
-                        
                         if (chBF){
                             var q = "select id, Biography_French__c from Biography__c where Id='"+myId +"'";
                             console.log(q);
@@ -225,10 +251,8 @@ org.authenticate({
                                 oauth:oauth,
                                 query : q
                             } , function(err,resp){
-                                // console.log(resp);
-                                // console.log(resp.records[0].get('Biography_French__c'));
-                                var b = {'Id':myId, 'Biography_French__c': resp.records[0].get('Biography_French__c')};
-                                console.log(JSON.stringify(b));
+                                var b = {'field':'Biography_French__c', 'value': resp.records[0].get('Biography_French__c')};
+                                result['additionnal'].push(b);
                                 var bio = nforce.createSObject('Biography__c');
                                 bio.set('Id',myId);
                                 bio.set('chkBioF__c',false);
@@ -245,9 +269,8 @@ org.authenticate({
                                 query :q
                             } , function(err,resp){
                                 console.log(resp.records[0].get('Biography_English__c'));
-                                var b = {'Id':myId, 'Biography_English__c': resp.records[0].get('Biography_English__c')};
-                                console.log(JSON.stringify(b));
-                                
+                                var b = {'field':'Biography_English__c', 'value': resp.records[0].get('Biography_English__c')};
+                                result['additionnal'].push(b);
                                 var bio = nforce.createSObject('Biography__c');
                                 bio.set('Id',myId);
                                 bio.set('chkBioE__c',false);
@@ -263,7 +286,9 @@ org.authenticate({
                                 oauth:oauth,
                                 query :q
                             } , function(err,resp){
-                                console.log(resp.records[0].get('Biography_German__c'));
+                                //console.log(resp.records[0].get('Biography_German__c'));
+                                var b = {'field':'Biography_German__c', 'value': resp.records[0].get('Biography_German__c')};
+                                result['additionnal'].push(b);
                                 var bio = nforce.createSObject('Biography__c');
                                 bio.set('Id',myId);
                                 bio.set('chkBioD__c',false);
@@ -273,33 +298,9 @@ org.authenticate({
                                 
                             });
                         }
-                        /*
-						 * for (var boucle in sfmetadata) { if (key ==
-						 * sfmetadata[boucle].Prefix) { var table =
-						 * sfmetadata[boucle].Name;
-						 * 
-						 * for (var field in sfmetadata[boucle].fields) { if
-						 * (sfmetadata[boucle].fields[field].fType ==
-						 * 'TEXTAREA') {
-						 * flds2callback.push(sfmetadata[boucle].fields[field].fName); } }
-						 * console.log('LTF', flds2callback); break; } }
-						 */
-                        /*
-						 * for (item in data.sobject) { var record = { table:
-						 * table, operation: data.event.type, champ: item,
-						 * valeur: data.sobject[item], sequence:
-						 * data.event.replayId, id: myId } }
-						 */
-                        /*
-						 * var chkDescr = data.sobject.ubLongBioChanged__c; //
-						 * console.log(chkDescr); if (chkDescr) { var what2chk =
-						 * data.sobject.testMultipick__c; console.log(what2chk);
-						 * checkDescription(myId, oauth, what2chk); }
-						 */
-                        // emit the record to be displayed on the page
-                        // socket.emit('record-processed',
-						// JSON.stringify(data));
-                    });
+                        console.log(JSON.stringify(result));
+                        
+                     });
                 });
             }
         });
