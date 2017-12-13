@@ -242,8 +242,8 @@ org.authenticate({
                                 org.update({sobject:bio, oauth:oauth}, function(err, r){
                                 	  if(!err) console.log('It worked!');
                                 });
-                                result['additional'].push(b);
-                            });
+                                
+                            }).then(result['additional'].push(b));
                         }
                         if (chBF){
                             var q = "select id, Biography_French__c from Biography__c where Id='"+myId +"'";
