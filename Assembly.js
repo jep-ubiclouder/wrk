@@ -124,7 +124,28 @@ function mapRT(org,oauth){
     	
     });
 }
-
+async function getLT (org,oauth,field,myId){
+	var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
+	var b = 1
+	let resultSQL
+	try{
+		resultSQL = await  org.query({
+	        oauth:oauth,
+	        query : q
+	    }	, function(err,resp){
+	    	
+	    	if (err) return err;
+	        var b = {'field':field, 'value': resp.records[0].get(field)};
+	        console.log(b);	        
+	        }
+		);
+		return b;
+	}
+	catch (err){
+		console.log(err);
+	} 
+	return resultSQL
+}
 const getLTF= function(org,oauth,field,myId){
 	return new Promise((resolve,reject)=>{
 		var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
