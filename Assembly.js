@@ -149,7 +149,7 @@ org.authenticate({
         	if (resp.records && resp.records.length){
         		var recordTypes ={};
         		resp.records.forEach(function(rec) {
-        			recordTypes[rec.get('KeyPrefix')] = {'QualifiedApiName':rec.get('QualifiedApiName'),'':rec.get('Label'),'':rec.get('Label')};
+        			recordTypes[rec.get('KeyPrefix')] = {'QualifiedApiName':rec.get('QualifiedApiName'),'Label':rec.get('Label'),'MasterLabel':rec.get('MasterLabel')};
         		});
         		globalSchema = recordTypes;
         		}
