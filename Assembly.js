@@ -137,7 +137,7 @@ var getLTF= function(org,oauth,field,myId){
 	    	if (err) return reject(err);
 	        var b = {'field':field, 'value': resp.records[0].get(field)};
 	        //console.log(b);
-	        resolve(b);
+	     
 	        var bio = nforce.createSObject('Biography__c');
 	        bio.set('Id',myId);
 	        bio.set('chkBioRTF__c',false);
@@ -145,7 +145,7 @@ var getLTF= function(org,oauth,field,myId){
 	        org.update({sobject:bio, oauth:oauth}, function(err, r){
 	        	  if(!err) console.log('It worked!');
 	        });
-	        
+	        resolve(b);
 	    	}
 	    )
 	})
@@ -262,7 +262,15 @@ org.authenticate({
 
                         
                         if (chBF){
-                            var q = "select id, Biography_French__c from Biography__c where Id='"+myId +"'";
+                        	getLTF(org,oauth,'Biography_French__c',myId)
+                    		.then((b)=>	function(b){
+                    						console.log('in then',b);
+                    						result['additional'].push(b)
+                    				})
+                    		.catch((err) => function(err){console.log(err)});
+                        	
+                        	/*
+                            var q = "select id,  from Biography__c where Id='"+myId +"'";
                             console.log(q);
                             org.query({
                                 oauth:oauth,
@@ -277,9 +285,17 @@ org.authenticate({
                                 	  if(!err) console.log('It worked!');
                                 });
                                 result['additional'].push(b);
-                            });
+                            });*/
                         }
                         if (chBE){
+                        	getLTF(org,oauth,'Biography_English__c',myId)
+                    		.then((b)=>	function(b){
+                    						console.log('in then',b);
+                    						result['additional'].push(b)
+                    				})
+                    		.catch((err) => function(err){console.log(err)});
+                        	                        	
+                        	/*
                             var q = "select id, Biography_English__c from Biography__c where Id = '"+myId +"'";
                             console.log(q);
                             org.query({
@@ -296,9 +312,16 @@ org.authenticate({
                                 	  if(!err) console.log('It worked!');
                                 });
                                 result['additional'].push(b);
-                            });
+                            });*/
                         }
                         if (chBD){
+                        	getLTF(org,oauth,'Biography_German__c',myId)
+                    		.then((b)=>	function(b){
+                    						console.log('in then',b);
+                    						result['additional'].push(b)
+                    				})
+                    		.catch((err) => function(err){console.log(err)});
+                        	/*
                             var q = "select id, Biography_German__c from Biography__c where Id = '"+myId +"'";
                             console.log(q);
                             org.query({
@@ -315,7 +338,7 @@ org.authenticate({
                                 	  if(!err) console.log('It worked!');
                                 });
                                 result['additional'].push(b);
-                            });
+                            });*/
                         }
                         console.log(JSON.stringify(result));
                         console.log(result);
