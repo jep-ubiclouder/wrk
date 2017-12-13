@@ -143,8 +143,6 @@ const getLTF= function(org,oauth,field,myId){
         
     })
     return b
-	
-	
 }
 
 org.authenticate({
@@ -255,7 +253,7 @@ org.authenticate({
                         			)
                         			}
 
-                        }
+                        
                         if (chBF){
                             var q = "select id, Biography_French__c from Biography__c where Id='"+myId +"'";
                             console.log(q);
