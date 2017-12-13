@@ -125,7 +125,27 @@ function mapRT(org,oauth){
     });
 }
 
-
+const getLTF(org,oauth,field,myId){
+	var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
+    console.log(q);
+    org.query({
+        oauth:oauth,
+        query : q
+    } , function(err,resp){
+        var b = {'field':field, 'value': resp.records[0].get(field)};
+        console.log(b);
+        var bio = nforce.createSObject('Biography__c');
+        bio.set('Id',myId);
+        bio.set('chkBioRTF__c',false);
+        org.update({sobject:bio, oauth:oauth}, function(err, r){
+        	  if(!err) console.log('It worked!');
+        });
+        
+    })
+    return b
+	
+	
+}
 
 org.authenticate({
     username: config.USERNAME,
@@ -228,22 +248,13 @@ org.authenticate({
                         }
                         
                         if(chRTF){
-                        	var q = "select id, Formatted_Text_Element__c from Biography__c where Id='"+myId +"'";
-                            console.log(q);
-                            org.query({
-                                oauth:oauth,
-                                query : q
-                            } , function(err,resp){
-                                var b = {'field':'Formatted_Text_Element__c', 'value': resp.records[0].get('Formatted_Text_Element__c')};
-                                console.log(b);
-                                var bio = nforce.createSObject('Biography__c');
-                                bio.set('Id',myId);
-                                bio.set('chkBioRTF__c',false);
-                                org.update({sobject:bio, oauth:oauth}, function(err, r){
-                                	  if(!err) console.log('It worked!');
-                                });
-                                
-                            }).then(result['additional'].push(b));
+                        	getLTF(org,oauth,'Formatted_Text_Element__c',myId).then(
+                        			function(b){
+                        				result['additional'].push(b)
+                        				}
+                        			)
+                        			}
+
                         }
                         if (chBF){
                             var q = "select id, Biography_French__c from Biography__c where Id='"+myId +"'";
