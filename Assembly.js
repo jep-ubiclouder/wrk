@@ -139,7 +139,7 @@ org.authenticate({
         /*
          Un catalogue des prefixes pour trouver les noms d'objets
          */
-        var querySchema = 'Select QualifiedApiName, MasterLabel, Label, KeyPrefix, From EntityDefinition';
+        var querySchema = 'Select QualifiedApiName, MasterLabel, Label, KeyPrefix From EntityDefinition';
         var globalSchema =  1;
         org.query({
             query: querySchema,
