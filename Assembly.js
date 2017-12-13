@@ -194,7 +194,7 @@ org.authenticate({
                         if(rtypeId){
                         	console.log(rtypeId);
                         	// console.log(allRecordtypes);
-                        	// console.log(allRecordtypes[rtypeId]);
+                        	console.log(allRecordtypes[rtypeId]);
                         }
                         
                         if(chRTF){
