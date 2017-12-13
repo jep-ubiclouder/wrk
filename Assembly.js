@@ -126,7 +126,7 @@ function mapRT(org,oauth){
 }
 
 var getLTF= function(org,oauth,field,myId){
-	return new Promise( function (resolve,reject){
+	return new Promise(resolve,reject)=>{
 		var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
 	    console.log(q);
 	    org.query({
@@ -253,13 +253,12 @@ org.authenticate({
                         
                         if(chRTF){
                         	getLTF(org,oauth,'Formatted_Text_Element__c',myId)
-                        		.then(
-                        				function(b){
-                        					console.log('in then',b);
-                        					result['additional'].push(b)
-                        				}
-                        			,function(err){console.log(err)})
-                        		}
+                        		.then((b)=>	function(b){
+                        						console.log('in then',b);
+                        						result['additional'].push(b)
+                        				})
+                        		.catch((err) => function(err){console.log(err)}));
+                        }
 
                         
                         if (chBF){
