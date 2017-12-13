@@ -262,6 +262,7 @@ org.authenticate({
                         	getLT(org,oauth,'Formatted_Text_Element__c',myId).then((resp) => {
                         		
                         		console.log('back from async',resp );
+                        		result['additional'].push(b);
                         	});
                         	 
                         	 
@@ -354,7 +355,7 @@ org.authenticate({
                             });*/
                         }
                         //console.log(JSON.stringify(result));
-                        //console.log(result);
+                        console.log(result);
                      });
                 });
             }
