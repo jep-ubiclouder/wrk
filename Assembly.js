@@ -125,7 +125,7 @@ function mapRT(org,oauth){
     });
 }
 
-const getLTF(org,oauth,field,myId){
+const getLTF= function(org,oauth,field,myId){
 	var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
     console.log(q);
     org.query({
