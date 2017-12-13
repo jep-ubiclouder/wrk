@@ -254,9 +254,11 @@ org.authenticate({
                         if(chRTF){
                         	getLTF(org,oauth,'Formatted_Text_Element__c',myId).then(
                         			function(b){
+                        				console.log('in then',b);
                         				result['additional'].push(b)
                         				}
                         			)
+                        			.
                         		}
 
                         
