@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-
+var Promise = require('promise');
 
 var config = require('./config.js');
 // plugin SF
