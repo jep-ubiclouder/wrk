@@ -135,7 +135,7 @@ const  getLT = async (org,oauth,field,myId) => {
 	    	
 	    	if (err) return err;
 	        b = {'field':field, 'value': resp.records[0].get(field)};
-	        // console.log(b);	        
+	        return b;       
 	        }
 		);
 		
