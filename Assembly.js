@@ -146,7 +146,7 @@ const getLTF = function(org, oauth, field, myId,chkFld) {
                 'field': field,
                 'value': resp.records[0].get(field)
             };
-            console.log(b);
+            // console.log(b);
 
             var bio = nforce.createSObject('Biography__c');
             bio.set('Id', myId);
@@ -240,11 +240,7 @@ org.authenticate({
                         console.log('Error received from pushtopic: ' + error);
                     });
                     str.on('data', function(data) {
-                        // console.log(allRecordtypes);
-                        //console.log('Received the following from pushtopic:');
-                        //console.log(data);
                         var result = {}
-
                         result['data'] = data.sobject;
                         result['event'] = data.event;
                         result['meta'] = {
@@ -299,7 +295,7 @@ org.authenticate({
                                 result['additional'].push(resp);
                             });
                         }
-                        console.log(result);
+                        console.log('*************************************',result);
                     });
                 });
             }
