@@ -257,7 +257,7 @@ org.authenticate({
                         						console.log('in then',b);
                         						result['additional'].push(b)
                         				})
-                        		.catch((err) => function(err){console.log(err)}));
+                        		.catch((err) => function(err){console.log(err)});
                         }
 
                         
