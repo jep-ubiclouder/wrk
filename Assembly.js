@@ -128,7 +128,7 @@ const  getLT = async (org,oauth,field,myId) => {
 	var q = "select id,"+field+"  from Biography__c where Id='"+myId +"'";
 	//var b = 1;
 	console.log('in getLT',q);
-	let resultSQL = await  org.query({
+	let resultSQL = await org.query({
 	        oauth:oauth,
 	        query : q
 	    }	, function(err,resp){
