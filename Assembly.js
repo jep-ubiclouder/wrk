@@ -273,13 +273,14 @@ org.authenticate({
                         }
                         
                         if(chRTF){
-                        	getLTF(org,oauth,'Formatted_Text_Element__c',myId)
+                        	getLT(org,oauth,'Formatted_Text_Element__c',myId)
                         		.then((b)=>	function(b){
                         						console.log('in then',b);
                         						result['additional'].push(b)
                         				})
                         		.catch((err) => function(err){console.log(err)});
                         }
+                        console.log(result);
 
                         
                         if (chBF){
