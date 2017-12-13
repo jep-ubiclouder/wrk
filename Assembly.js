@@ -145,9 +145,9 @@ org.authenticate({
         		var recordTypes ={};
         		resp.records.forEach(function(rec) {
         			// console.log(rec);
-        			console.log(rec.get('id').length);
+        			// console.log(rec.get('id').length);
         			
-        			recordTypes[rec.get('id')]={'id':rec.get('id'),'name':rec.get('name'),'object':rec.get('sobjecttype')};
+        			recordTypes[rec.get('id').slice(0,15)]={'id':rec.get('id'),'name':rec.get('name'),'object':rec.get('sobjecttype')};
         		});
         		//console.log(recordTypes);
         		// console.log('infonction',resp.records);
