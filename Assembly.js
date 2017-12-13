@@ -145,6 +145,8 @@ org.authenticate({
         		var recordTypes ={};
         		resp.records.forEach(function(rec) {
         			// console.log(rec);
+        			console.log(rec.get('id').length);
+        			
         			recordTypes[rec.get('id')]={'id':rec.get('id'),'name':rec.get('name'),'object':rec.get('sobjecttype')};
         		});
         		//console.log(recordTypes);
@@ -191,8 +193,8 @@ org.authenticate({
                         console.log(rtypeId);
                         if(rtypeId){
                         	console.log(rtypeId);
-                        	console.log(allRecordtypes);
-                        	console.log(allRecordtypes[rtypeId]);
+                        	// console.log(allRecordtypes);
+                        	// console.log(allRecordtypes[rtypeId]);
                         }
                         
                         if(chRTF){
