@@ -275,12 +275,13 @@ org.authenticate({
                         }
                         
                         if(chRTF){
-                        	getLT(org,oauth,'Formatted_Text_Element__c',myId)
-                        		.then((b)=>	function(b){
+                        	 var t = getLT(org,oauth,'Formatted_Text_Element__c',myId);
+                        	 console.log('t',t)
+                        		/*.then((b)=>	function(b){
                         						console.log('in then',b);
                         						result['additional'].push(b)
                         				})
-                        		.catch((err) => function(err){console.log(err)});
+                        		.catch((err) => function(err){console.log(err)}); */ 
                         }
                         console.log(result);
 
