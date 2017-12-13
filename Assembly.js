@@ -148,7 +148,7 @@ var getLTF= function(org,oauth,field,myId){
 	        resolve(b);
 	    	}
 	    )
-	}
+	})
 }
 
 org.authenticate({
