@@ -221,8 +221,8 @@ org.authenticate({
                     });
                     str.on('data', function(data) {
                     	// console.log(allRecordtypes);
-                        console.log('Received the following from pushtopic:');
-                        console.log(data);
+                        //console.log('Received the following from pushtopic:');
+                        //console.log(data);
                         var result ={}
                         
                         result['data'] = data.sobject;
@@ -340,8 +340,8 @@ org.authenticate({
                                 result['additional'].push(b);
                             });*/
                         }
-                        console.log(JSON.stringify(result));
-                        console.log(result);
+                        //console.log(JSON.stringify(result));
+                        //console.log(result);
                      });
                 });
             }
