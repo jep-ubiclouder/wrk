@@ -307,7 +307,7 @@ org.authenticate({
                                 });
                                 result['additional'].push(b);
                             });*/
-                        }
+                        
                         //console.log(JSON.stringify(result));
                         console.log(result);
                      });
