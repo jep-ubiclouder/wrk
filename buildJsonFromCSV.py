@@ -4,7 +4,7 @@ import sys
 
 
 if __name__ =='__main__':
-    arbre = {'0':{'Name':'root','children':[]}
+    arbre = {'0':{'Name':'root','children':[]}}
     with open('./categorie.csv','r') as f:
         reader = csv.DictReader(f, delimiter=';')
         for l in reader:
