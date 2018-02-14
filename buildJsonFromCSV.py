@@ -15,6 +15,6 @@ if __name__ =='__main__':
             if l['Parent'] not in arbre.keys():
                 arbre[l['Parent']]  ={'children':[]}
                 
-            arbre[l['Parent']]['children'].push(l['id'])
+            arbre[l['Parent']]['children'].append(l['id'])
             
     print(arbre)            
