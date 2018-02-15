@@ -28,4 +28,4 @@ if __name__ =='__main__':
             
     #sf.Business_Category__c.bulk.insert(toInsert)
     
-    print(toInsert)
+    print(toInsert,len(toInsert))
