@@ -23,7 +23,7 @@ if __name__ =='__main__':
     with open('./categorie.csv','r') as f:
         reader = csv.DictReader(f, delimiter=';')
         for l in reader:
-            newRec= {'Clef_Statec__c':l['id'],'Clef_Parent__c':l['Parent'],'Name':l['Nom'],'Libelle__c':l['Nom'],'Poids__c':l['Poids']}
+            newRec= {'Clef_Statec__c':l['id'],'Clef_Parent__c':l['Parent'],'Name':l['Nom'],'Libelle__c':l['Nom']}
             toInsert.append(newRec)
             
     #sf.Business_Category__c.bulk.insert(toInsert)
