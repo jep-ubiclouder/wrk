@@ -16,7 +16,7 @@ from simple_salesforce import (
 
 
 if __name__ =='__main__':
-"""    arbre = {'0':{'Name':'root','children':[]}}
+	"""    arbre = {'0':{'Name':'root','children':[]}}
     with open('./categorie.csv','r') as f:
         reader = csv.DictReader(f, delimiter=';')
         for l in reader:
@@ -41,6 +41,6 @@ if __name__ =='__main__':
             newRec= {'Clef_Statec__c':l['id'],'Clef_Parent__c':l['Parent'],'Name':l['Nom'],'Libelle__c':l['Nom'],'Poids__c':l['Poids']}
             toInsert.append(newRec)
             
-    sf.Business_Category__c.bulk.insert(toInsert)
+    #sf.Business_Category__c.bulk.insert(toInsert)
     
-    
+    print(toInsert)
