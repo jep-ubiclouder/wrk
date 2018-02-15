@@ -26,6 +26,6 @@ if __name__ =='__main__':
             newRec= {'Clef_Statec__c':l['id'],'Clef_Parent__c':l['Parent'],'Name':l['Nom'],'Libelle__c':l['Nom']}
             toInsert.append(newRec)
             
-    sf.Business_Category__c.bulk.insert(toInsert)
+    sf.bulk.Business_Category__c.insert(toInsert)
     
     ## print(toInsert,len(toInsert))
