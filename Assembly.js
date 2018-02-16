@@ -55,7 +55,7 @@ function mapRT(org, oauth) {
 
     });
 }
-const getLT = async (org, oauth, field, myId,chkFld) => {
+const getLT = async(org, oauth, field, myId,chkFld) => {
     var q = "select id," + field + "  from Biography__c where Id='" + myId + "'";
     // var b = 1;
     // console.log('in getLT', q);
